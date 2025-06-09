@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Rsvp;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class RsvpController extends Controller
 {
@@ -13,7 +14,7 @@ class RsvpController extends Controller
         $data = $request->validate([
             'name' => 'required|string',
             'email' => 'required|email',
-            'status' => 'required|string',
+            'status' => ['required', Rule::in(['yes', 'no', 'maybe'])],
         ]);
         $data['event_id'] = $event->id;
 
