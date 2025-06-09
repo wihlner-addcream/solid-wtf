@@ -5,6 +5,9 @@ This repository contains a simple Laravel + Vue application for creating events 
 ## Setup
 
 ```bash
+# Enter the Laravel application directory
+cd calendar-app
+
 # Install PHP dependencies
 composer install
 
@@ -21,4 +24,6 @@ php artisan migrate
 php artisan serve
 ```
 
-The application uses SQLite by default and stores the database at `database/database.sqlite`.
+All Laravel commands should be executed from inside the `calendar-app` directory.
+
+The application uses SQLite by default and stores the database at `calendar-app/database/database.sqlite`.
