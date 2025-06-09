@@ -17,6 +17,8 @@ class RsvpController extends Controller
         ]);
         $data['event_id'] = $event->id;
 
-        return Rsvp::create($data);
+        $rsvp = Rsvp::create($data);
+
+        return response()->json($rsvp, 201);
     }
 }
