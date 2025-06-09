@@ -22,3 +22,10 @@ php artisan serve
 ```
 
 The application uses SQLite by default and stores the database at `database/database.sqlite`.
+
+## Running Tests
+
+```bash
+./vendor/bin/phpunit --no-coverage
+```
+
