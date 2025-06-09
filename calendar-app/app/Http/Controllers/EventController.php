@@ -21,7 +21,9 @@ class EventController extends Controller
             'end_time' => 'required|date|after:start_time',
         ]);
 
-        return Event::create($data);
+        $event = Event::create($data);
+
+        return response()->json($event, 201);
     }
 
     public function show(Event $event)
