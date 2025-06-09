@@ -38,12 +38,33 @@ class EventRsvpTest extends TestCase
         $payload = [
             'name' => 'John Doe',
             'email' => 'john@example.com',
-            'status' => 'confirmed',
+            'status' => 'yes',
         ];
 
         $response = $this->postJson("/api/events/{$event->id}/rsvp", $payload);
 
         $response->assertStatus(201)
                  ->assertJsonFragment(['email' => 'john@example.com']);
+    }
+
+    /** @test */
+    public function can_retrieve_events_with_related_rsvps(): void
+    {
+        $event = Event::create([
+            'title' => 'Party',
+            'start_time' => '2024-01-03 10:00:00',
+            'end_time' => '2024-01-03 11:00:00',
+        ]);
+
+        $this->postJson("/api/events/{$event->id}/rsvp", [
+            'name' => 'Alice',
+            'email' => 'alice@example.com',
+            'status' => 'yes',
+        ]);
+
+        $response = $this->getJson('/api/events');
+
+        $response->assertStatus(200)
+                 ->assertJsonFragment(['email' => 'alice@example.com']);
     }
 }
