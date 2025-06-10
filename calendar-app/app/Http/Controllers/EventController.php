@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreEventRequest;
 use App\Http\Controllers\Controller;
 
 class EventController extends Controller
@@ -13,14 +14,9 @@ class EventController extends Controller
         return Event::with('rsvps')->get();
     }
 
-    public function store(Request $request)
+    public function store(StoreEventRequest $request)
     {
-        $data = $request->validate([
-            'title' => 'required|string',
-            'description' => 'nullable|string',
-            'start_time' => 'required|date',
-            'end_time' => 'required|date|after:start_time',
-        ]);
+        $data = $request->validated();
 
         $event = Event::create($data);
 
