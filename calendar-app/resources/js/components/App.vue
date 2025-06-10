@@ -2,6 +2,12 @@
   <DashboardLayout>
   <div class="p-4">
     <h1 class="text-2xl font-bold mb-4">Events</h1>
+    <form @submit.prevent="fetchEvents" class="mb-4 space-y-2">
+      <input v-model="filters.title" placeholder="Search title" class="border p-1" />
+      <input type="date" v-model="filters.start" class="border p-1" />
+      <input type="date" v-model="filters.end" class="border p-1" />
+      <button type="submit" class="bg-blue-500 text-white px-2 py-1">Search</button>
+    </form>
     <form @submit.prevent="createEvent" class="mb-4 space-y-2">
       <input v-model="form.title" placeholder="Title" class="border p-1" />
       <input type="datetime-local" v-model="form.start_time" class="border p-1" />
@@ -43,9 +49,10 @@ import axios from 'axios';
 const events = ref([]);
 const form = ref({ title: '', description: '', start_time: '', end_time: '' });
 const rsvpForm = ref({ name: '', email: '', status: 'yes', event_id: null });
+const filters = ref({ title: '', start: '', end: '' });
 
 async function fetchEvents() {
-  const { data } = await axios.get('/api/events');
+  const { data } = await axios.get('/api/events', { params: filters.value });
   events.value = data;
 }
 
