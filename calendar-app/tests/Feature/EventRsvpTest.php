@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Event;
+use App\Models\Rsvp;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -29,17 +30,9 @@ class EventRsvpTest extends TestCase
     /** @test */
     public function rsvp_store_returns_created_status(): void
     {
-        $event = Event::create([
-            'title' => 'Another Event',
-            'start_time' => '2024-01-02 10:00:00',
-            'end_time' => '2024-01-02 11:00:00',
-        ]);
+        $event = Event::factory()->create();
 
-        $payload = [
-            'name' => 'John Doe',
-            'email' => 'john@example.com',
-            'status' => 'yes',
-        ];
+        $payload = Rsvp::factory()->make(['email' => 'john@example.com'])->only(['name', 'email', 'status']);
 
         $response = $this->postJson("/api/events/{$event->id}/rsvp", $payload);
 
@@ -50,17 +43,9 @@ class EventRsvpTest extends TestCase
     /** @test */
     public function can_retrieve_events_with_related_rsvps(): void
     {
-        $event = Event::create([
-            'title' => 'Party',
-            'start_time' => '2024-01-03 10:00:00',
-            'end_time' => '2024-01-03 11:00:00',
-        ]);
+        $event = Event::factory()->create();
 
-        $this->postJson("/api/events/{$event->id}/rsvp", [
-            'name' => 'Alice',
-            'email' => 'alice@example.com',
-            'status' => 'yes',
-        ]);
+        Rsvp::factory()->create(['event_id' => $event->id, 'email' => 'alice@example.com']);
 
         $response = $this->getJson('/api/events');
 
