@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use Eluceo\Ical\Component\Calendar;
-use Eluceo\Ical\Component\Event as IcsEvent;
+use Eluceo\iCal\Component\Calendar;
+use Eluceo\iCal\Component\Event as IcsEvent;
 
 class EventIcsController extends Controller
 {
