@@ -2,6 +2,11 @@
 
 This repository contains a simple Laravel + Vue application for creating events and tracking RSVPs.
 
+## Requirements
+
+- PHP **8.2** or newer
+- Node.js **18+** (see `.nvmrc` for the exact version)
+
 ## Setup
 
 ```bash
