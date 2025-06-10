@@ -21,9 +21,25 @@ git pull origin main
 ## Requirements
 
  - PHP **8.2** or newer
- - [Composer](https://getcomposer.org/)
- - Node.js **18+** (see `.nvmrc` for the exact version)
- - npm
+- [Composer](https://getcomposer.org/)
+- Node.js **18+** (see `.nvmrc` for the exact version)
+- npm
+
+## Quick Setup
+
+Run the included `setup.sh` script from the repository root to install Composer
+and NPM dependencies and prepare the application:
+
+```bash
+./setup.sh
+```
+
+After it completes you can start the server:
+
+```bash
+cd calendar-app
+php artisan serve
+```
 
 ## Setup
 
