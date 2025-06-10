@@ -9,9 +9,23 @@ use App\Http\Controllers\Controller;
 
 class EventController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Event::with('rsvps')->get();
+        $query = Event::query()->with('rsvps');
+
+        if ($title = $request->query('title')) {
+            $query->where('title', 'like', "%{$title}%");
+        }
+
+        if ($start = $request->query('start')) {
+            $query->where('start_time', '>=', $start);
+        }
+
+        if ($end = $request->query('end')) {
+            $query->where('end_time', '<=', $end);
+        }
+
+        return $query->get();
     }
 
     public function store(StoreEventRequest $request)
