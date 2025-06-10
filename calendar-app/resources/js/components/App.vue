@@ -1,34 +1,36 @@
 <template>
   <DashboardLayout>
-  <div class="p-4">
-    <h1 class="text-2xl font-bold mb-4">Events</h1>
-    <form @submit.prevent="fetchEvents" class="mb-4 space-y-2">
-      <input v-model="filters.title" placeholder="Search title" class="border p-1" />
-      <input type="date" v-model="filters.start" class="border p-1" />
-      <input type="date" v-model="filters.end" class="border p-1" />
-      <button type="submit" class="bg-blue-500 text-white px-2 py-1">Search</button>
+  <div class="space-y-6">
+    <h1 class="text-2xl font-bold">Events</h1>
+    <form @submit.prevent="fetchEvents" class="bg-white p-4 shadow rounded space-y-2">
+      <div class="flex flex-wrap gap-2">
+        <input v-model="filters.title" placeholder="Search title" class="border p-1 flex-1" />
+        <input type="date" v-model="filters.start" class="border p-1" />
+        <input type="date" v-model="filters.end" class="border p-1" />
+        <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Search</button>
+      </div>
     </form>
-    <form @submit.prevent="createEvent" class="mb-4 space-y-2">
-      <input v-model="form.title" placeholder="Title" class="border p-1" />
-      <input type="datetime-local" v-model="form.start_time" class="border p-1" />
-      <input type="datetime-local" v-model="form.end_time" class="border p-1" />
-      <textarea v-model="form.description" placeholder="Description" class="border p-1"></textarea>
-      <button type="submit" class="bg-blue-500 text-white px-2 py-1">Create</button>
+    <form @submit.prevent="createEvent" class="bg-white p-4 shadow rounded space-y-2">
+      <input v-model="form.title" placeholder="Title" class="border p-1 w-full" />
+      <input type="datetime-local" v-model="form.start_time" class="border p-1 w-full" />
+      <input type="datetime-local" v-model="form.end_time" class="border p-1 w-full" />
+      <textarea v-model="form.description" placeholder="Description" class="border p-1 w-full"></textarea>
+      <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Create</button>
     </form>
-    <div v-for="event in events" :key="event.id" class="border p-2 mb-2">
+    <div v-for="event in events" :key="event.id" class="bg-white p-4 shadow rounded mb-4">
       <h2 class="font-semibold">{{ event.title }}</h2>
       <p>{{ event.description }}</p>
       <p>{{ event.start_time }} - {{ event.end_time }}</p>
-      <button @click="downloadIcs(event)" class="bg-gray-700 text-white px-2 py-1 mb-2">Download ICS</button>
-      <form @submit.prevent="rsvp(event)" class="mt-2">
-        <input v-model="rsvpForm.name" placeholder="Your name" class="border p-1" />
-        <input v-model="rsvpForm.email" placeholder="Your email" class="border p-1" />
-        <select v-model="rsvpForm.status" class="border p-1">
+      <button @click="downloadIcs(event)" class="bg-gray-700 text-white px-2 py-1 rounded mb-2">Download ICS</button>
+      <form @submit.prevent="rsvp(event)" class="mt-2 space-y-2">
+        <input v-model="rsvpForm.name" placeholder="Your name" class="border p-1 w-full" />
+        <input v-model="rsvpForm.email" placeholder="Your email" class="border p-1 w-full" />
+        <select v-model="rsvpForm.status" class="border p-1 w-full">
           <option value="yes">Yes</option>
           <option value="no">No</option>
           <option value="maybe">Maybe</option>
         </select>
-        <button type="submit" class="bg-green-500 text-white px-2 py-1">RSVP</button>
+        <button type="submit" class="bg-green-600 text-white px-3 py-1 rounded">RSVP</button>
       </form>
       <div class="mt-2">
         <h3 class="font-semibold">Responses:</h3>
