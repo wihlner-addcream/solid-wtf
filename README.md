@@ -2,6 +2,22 @@
 
 This repository contains a simple Laravel + Vue application for creating events and tracking RSVPs.
 
+## Cloning the repository
+
+Before running any Git commands, clone the project and ensure the remote is set. This avoids errors such as `fatal: not a git repository`.
+
+```bash
+# Clone from GitHub
+git clone https://github.com/<your-username>/solid-wtf.git
+cd solid-wtf
+
+# If the remote is missing, add it
+git remote add origin https://github.com/<your-username>/solid-wtf.git
+
+# Pull the latest changes
+git pull origin main
+```
+
 ## Requirements
 
  - PHP **8.2** or newer
