@@ -1,6 +1,6 @@
 # Calendar App
 
-This repository contains a simple Laravel + Vue application for creating events and tracking RSVPs.
+This repository contains a simple Laravel + Vue application for creating events and tracking RSVPs. Events can also be exported as standard `.ics` files for use in calendar clients.
 
 ## Cloning the repository
 
@@ -39,6 +39,14 @@ After it completes you can start the server:
 ```bash
 cd calendar-app
 php artisan serve
+```
+
+### ICS Export
+
+Events can be downloaded as `.ics` files via the API:
+
+```bash
+curl http://localhost:8000/api/events/{id}/ics -o event.ics
 ```
 
 ## Setup
