@@ -49,6 +49,14 @@ Events can be downloaded as `.ics` files via the API:
 curl http://localhost:8000/api/events/{id}/ics -o event.ics
 ```
 
+### Event Filtering
+
+The events endpoint accepts optional query parameters to filter results:
+
+```bash
+curl "http://localhost:8000/api/events?title=Meeting&start=2024-01-01&end=2024-01-31"
+```
+
 ## Setup
 
 ```bash

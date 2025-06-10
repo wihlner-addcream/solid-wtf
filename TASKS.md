@@ -19,7 +19,7 @@ This document tracks potential enhancements for the calendar application.
   - Enable drag-and-drop event interactions.
 
 - [ ] **Search and Filters**
-  - Filter events by title or date range via the API.
+  - [x] Filter events by title or date range via the API.
   - Provide search controls in the frontend.
 
 - [ ] **Improved Validation and Error Messages**
