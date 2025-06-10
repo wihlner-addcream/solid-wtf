@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\Rsvp;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 
 class RsvpController extends Controller
 {
