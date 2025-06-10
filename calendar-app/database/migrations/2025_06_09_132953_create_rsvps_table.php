@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('email');
-            $table->string('status')->default('pending');
+            $table->string('status');
             $table->timestamps();
         });
     }
