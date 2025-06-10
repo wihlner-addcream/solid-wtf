@@ -1,4 +1,5 @@
 <template>
+  <DashboardLayout>
   <div class="p-4">
     <h1 class="text-2xl font-bold mb-4">Events</h1>
     <form @submit.prevent="createEvent" class="mb-4 space-y-2">
@@ -12,6 +13,7 @@
       <h2 class="font-semibold">{{ event.title }}</h2>
       <p>{{ event.description }}</p>
       <p>{{ event.start_time }} - {{ event.end_time }}</p>
+      <button @click="downloadIcs(event)" class="bg-gray-700 text-white px-2 py-1 mb-2">Download ICS</button>
       <form @submit.prevent="rsvp(event)" class="mt-2">
         <input v-model="rsvpForm.name" placeholder="Your name" class="border p-1" />
         <input v-model="rsvpForm.email" placeholder="Your email" class="border p-1" />
@@ -30,10 +32,12 @@
       </div>
     </div>
   </div>
+  </DashboardLayout>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import DashboardLayout from './DashboardLayout.vue';
 import axios from 'axios';
 
 const events = ref([]);
@@ -55,6 +59,10 @@ async function rsvp(event) {
   await axios.post(`/api/events/${event.id}/rsvp`, { ...rsvpForm.value });
   rsvpForm.value = { name: '', email: '', status: 'yes' };
   fetchEvents();
+}
+
+function downloadIcs(event) {
+  window.location = `/api/events/${event.id}/ics`;
 }
 
 onMounted(fetchEvents);
